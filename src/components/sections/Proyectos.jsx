@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 // ── WhatsApp button icon ────────────────────────────────────────
 const WAIcon = () => (
@@ -8,17 +8,62 @@ const WAIcon = () => (
     </svg>
 );
 
-// ── Proyectos carousel items ────────────────────────────────────
+// ── Arrow icons for slider controls ─────────────────────────────
+const ChevronLeft = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
+const ChevronRight = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
+// ── Proyectos data (placeholder) ────────────────────────────────
 const proyectos = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
+    { id: 1, title: 'Proyecto 1' },
+    { id: 2, title: 'Proyecto 2' },
+    { id: 3, title: 'Proyecto 3' },
+    { id: 4, title: 'Proyecto 4' },
+    { id: 5, title: 'Proyecto 5' },
 ];
 
+const AUTOPLAY_MS = 4000;
+
 const Proyectos = () => {
-    const sliderRef = useRef(null);
+    const [current, setCurrent] = useState(0);
+    const [direction, setDirection] = useState('next'); // 'next' | 'prev'
+    const total = proyectos.length;
+
+    const goTo = useCallback((index, dir) => {
+        setDirection(dir);
+        setCurrent(index);
+    }, []);
+
+    const next = useCallback(() => {
+        goTo((current + 1) % total, 'next');
+    }, [current, total, goTo]);
+
+    const prev = useCallback(() => {
+        goTo((current - 1 + total) % total, 'prev');
+    }, [current, total, goTo]);
+
+    // Autoplay (pauses on hover)
+    const isHovered = useRef(false);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (!isHovered.current) next();
+        }, AUTOPLAY_MS);
+        return () => clearInterval(timer);
+    }, [next]);
+
+    // Compute visible indices: [farPrev, prev, current, next, farNext]
+    const prevIndex = (current - 1 + total) % total;
+    const nextIndex = (current + 1) % total;
+    const farPrevIndex = (current - 2 + total) % total;
+    const farNextIndex = (current + 2) % total;
 
     return (
         <section className="proyectos">
@@ -37,20 +82,61 @@ const Proyectos = () => {
                     </p>
                 </div>
 
-                {/* ── Slider de imágenes ── */}
-                <div className="proyectos__slider-wrapper">
-                    <div className="proyectos__slider" ref={sliderRef}>
-                        {proyectos.map((p) => (
-                            <div key={p.id} className="proyecto-slide">
-                                <div className="proyecto-slide__img" aria-label={`Proyecto ${p.id}`} />
-                            </div>
-                        ))}
+                {/* ── Slider ── */}
+                <div
+                    className="proyectos__slider-wrapper"
+                    onMouseEnter={() => (isHovered.current = true)}
+                    onMouseLeave={() => (isHovered.current = false)}
+                >
+                    <div className="proyectos__slider">
+                        {proyectos.map((p, i) => {
+                            let posClass = 'slide--hidden';
+                            if (i === current) posClass = 'slide--center';
+                            else if (i === prevIndex) posClass = 'slide--left';
+                            else if (i === nextIndex) posClass = 'slide--right';
+                            else if (i === farPrevIndex) posClass = 'slide--far-left';
+                            else if (i === farNextIndex) posClass = 'slide--far-right';
+
+                            return (
+                                <div
+                                    key={p.id}
+                                    className={`proyecto-slide ${posClass}`}
+                                    onClick={() => i !== current && goTo(i, i > current ? 'next' : 'prev')}
+                                    style={{ cursor: i !== current ? 'pointer' : 'default' }}
+                                >
+                                    <div
+                                        className="proyecto-slide__img"
+                                        aria-label={p.title}
+                                    />
+                                </div>
+                            );
+                        })}
                     </div>
+
+                    {/* ── Controls ── */}
+                    <button className="proyectos__arrow proyectos__arrow--left" onClick={prev} aria-label="Anterior">
+                        <ChevronLeft />
+                    </button>
+                    <button className="proyectos__arrow proyectos__arrow--right" onClick={next} aria-label="Siguiente">
+                        <ChevronRight />
+                    </button>
+                </div>
+
+                {/* ── Dots ── */}
+                <div className="proyectos__dots">
+                    {proyectos.map((p, i) => (
+                        <button
+                            key={p.id}
+                            className={`proyectos__dot ${i === current ? 'proyectos__dot--active' : ''}`}
+                            onClick={() => goTo(i, i > current ? 'next' : 'prev')}
+                            aria-label={`Ir a proyecto ${i + 1}`}
+                        />
+                    ))}
                 </div>
 
                 {/* ── CTA WhatsApp ── */}
                 <div className="proyectos__cta">
-                    <p className="proyectos__cta-text">¿Tienes un proyecto similar en mente?</p>
+                    <p className="proyectos__cta-text">¿Tenés un proyecto similar en mente?</p>
                     <a
                         href="https://wa.me/1234567890"
                         target="_blank"

@@ -1,0 +1,89 @@
+@use '../variables' as *;
+
+/* ═══════════════════════════════════════════════
+   VENTAJAS SECTION
+═══════════════════════════════════════════════ */
+.ventajas {
+    width: 100%;
+    background-color: $navy;
+    padding: 5rem 0;
+
+    &__inner {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 2rem 0 4rem;
+        display: grid;
+        grid-template-columns: 0.9fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+    }
+
+    &__img-placeholder {
+        width: 100%;
+        aspect-ratio: 1 / 1.1;
+        background-color: #d8d8d8;
+        border-radius: 14px;
+        max-height: 360px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    &__title {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: $white;
+        margin: 0 0 2.2rem 0;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+/* ── Ventaja Item ────────────────────────────── */
+.ventaja-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &__titulo {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $orange;
+        margin: 0;
+    }
+
+    &__desc {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.65;
+        margin: 0;
+        max-width: none;
+    }
+}
+
+/* ── Ventajas: responsive ────────────────────── */
+@media (max-width: 768px) {
+    .ventajas__inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .ventajas__img-placeholder {
+        aspect-ratio: 16 / 9;
+        max-height: 240px;
+    }
+}

@@ -1,0 +1,315 @@
+@use '../variables' as *;
+
+/* ═══════════════════════════════════════════════
+   PROYECTOS SECTION
+═══════════════════════════════════════════════ */
+.proyectos {
+    width: 100%;
+    background-color: $navy;
+    padding: 0;
+
+    // ── Above the fold wrapper ──────────────────
+    &__above-fold {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0rem 0 3rem 0;
+    }
+
+    &__header {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    &__label {
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &__title {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: $white;
+        margin: 0;
+
+        &--orange {
+            color: $orange;
+        }
+    }
+
+    &__subtitle {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.65;
+        margin: 0;
+        max-width: 500px;
+    }
+
+    // ── Slider ───────────────────────────────────
+    &__slider-wrapper {
+        width: 100%;
+        position: relative;
+        padding: 0 2rem;
+    }
+
+    &__slider {
+        position: relative;
+        height: 320px;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+
+    // ── Arrow buttons ────────────────────────────
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.4);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: color 0.2s;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        &--left {
+            left: 0;
+        }
+
+        &--right {
+            right: 0;
+        }
+    }
+
+    // ── Dots ─────────────────────────────────────
+    &__dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    &__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.3s, border-color 0.3s, transform 0.2s;
+        padding: 0;
+
+        &:hover {
+            border-color: $white;
+            transform: scale(1.2);
+        }
+
+        &--active {
+            background: $orange;
+            border-color: $orange;
+        }
+    }
+
+    // ── CTA ──────────────────────────────────────
+    &__cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 2.5rem 2rem 0 2rem;
+        flex-wrap: wrap;
+    }
+
+    &__cta-text {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+    }
+
+    &__cta-btn {
+        font-size: 0.82rem;
+        padding: 0.5rem 1rem;
+        gap: 0.5rem;
+    }
+
+    // ── Quote (below the fold) ────────────────────
+    &__quote {
+        background-color: $navy;
+        padding: 6rem 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__quote-text {
+        font-size: clamp(1.3rem, 3vw, 1.85rem);
+        font-weight: 700;
+        font-style: italic;
+        line-height: 1.55;
+        text-align: center;
+        max-width: 560px;
+        margin: 0;
+        color: #5b8fba;
+
+        .q-orange {
+            color: $orange;
+        }
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   PROYECTO SLIDE – positioned transitions
+═══════════════════════════════════════════════ */
+.proyecto-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    pointer-events: auto;
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        background-color: #d8d8d8;
+        border-radius: 12px;
+    }
+
+    // ── Center (active slide) ────────────────────
+    &.slide--center {
+        width: 380px;
+        height: 260px;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        z-index: 5;
+        pointer-events: auto;
+    }
+
+    // ── Left (previous slide) ────────────────────
+    &.slide--left {
+        width: 280px;
+        height: 200px;
+        transform: translate(calc(-50% - 310px), -50%) scale(0.9);
+        opacity: 0.6;
+        z-index: 3;
+    }
+
+    // ── Right (next slide) ───────────────────────
+    &.slide--right {
+        width: 280px;
+        height: 200px;
+        transform: translate(calc(-50% + 310px), -50%) scale(0.9);
+        opacity: 0.6;
+        z-index: 3;
+    }
+
+    // ── Far left ─────────────────────────────────
+    &.slide--far-left {
+        width: 220px;
+        height: 160px;
+        transform: translate(calc(-50% - 560px), -50%) scale(0.8);
+        opacity: 0.3;
+        z-index: 1;
+    }
+
+    // ── Far right ────────────────────────────────
+    &.slide--far-right {
+        width: 220px;
+        height: 160px;
+        transform: translate(calc(-50% + 560px), -50%) scale(0.8);
+        opacity: 0.3;
+        z-index: 1;
+    }
+
+    // ── Hidden slides ────────────────────────────
+    &.slide--hidden {
+        width: 200px;
+        height: 160px;
+        transform: translate(-50%, -50%) scale(0.6);
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+/* ── Proyectos: responsive ──────────────────── */
+@media (max-width: 768px) {
+    .proyectos__above-fold {
+        padding: 3rem 0 2rem 0;
+    }
+
+    .proyectos__slider {
+        height: 240px;
+        max-width: 100%;
+    }
+
+    .proyecto-slide {
+        &.slide--center {
+            width: 260px;
+            height: 190px;
+        }
+
+        &.slide--left {
+            width: 180px;
+            height: 140px;
+            transform: translate(calc(-50% - 200px), -50%) scale(0.85);
+        }
+
+        &.slide--right {
+            width: 180px;
+            height: 140px;
+            transform: translate(calc(-50% + 200px), -50%) scale(0.85);
+        }
+    }
+
+    .proyectos__cta {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .proyecto-slide {
+        &.slide--center {
+            width: 220px;
+            height: 160px;
+        }
+
+        &.slide--left,
+        &.slide--right {
+            opacity: 0.3;
+            width: 140px;
+            height: 110px;
+        }
+
+        &.slide--left {
+            transform: translate(calc(-50% - 150px), -50%) scale(0.8);
+        }
+
+        &.slide--right {
+            transform: translate(calc(-50% + 150px), -50%) scale(0.8);
+        }
+    }
+}

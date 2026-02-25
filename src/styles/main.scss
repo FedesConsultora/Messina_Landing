@@ -1,8 +1,14 @@
 @use 'variables' as *;
+@use 'fonts';
 @use 'layout';
 
-/* ── Google Font ──────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+// ── Section styles ─────────────────────────────
+@use 'sections/hero';
+@use 'sections/nosotros';
+@use 'sections/servicios';
+@use 'sections/ventajas';
+@use 'sections/proyectos';
+@use 'sections/testimonios';
 
 :root {
     font-family: $font-family;

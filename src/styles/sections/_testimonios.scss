@@ -1,0 +1,263 @@
+@use '../variables' as *;
+
+/* ═══════════════════════════════════════════════
+   TESTIMONIOS SECTION
+═══════════════════════════════════════════════ */
+.testimonios {
+    width: 100%;
+    background-color: $navy;
+    padding: 5rem 0;
+
+    &__header {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    &__label {
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &__title {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: $white;
+        margin: 0;
+
+        &--orange {
+            color: $orange;
+        }
+    }
+
+    // ── Slider wrapper ───────────────────────────
+    &__slider-wrapper {
+        width: 100%;
+        position: relative;
+        padding: 0 2rem;
+    }
+
+    &__slider {
+        position: relative;
+        height: 340px;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+    }
+
+    // ── Arrow buttons ────────────────────────────
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.4);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: color 0.2s;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        &--left {
+            left: 0;
+        }
+
+        &--right {
+            right: 0;
+        }
+    }
+
+    // ── Dots ─────────────────────────────────────
+    &__dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    &__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.3s, border-color 0.3s, transform 0.2s;
+        padding: 0;
+
+        &:hover {
+            border-color: $white;
+            transform: scale(1.2);
+        }
+
+        &--active {
+            background: $orange;
+            border-color: $orange;
+        }
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   TESTIMONIO CARD – positioned slider
+═══════════════════════════════════════════════ */
+.testimonio-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    pointer-events: auto;
+
+    background-color: #141e2e;
+    border-radius: 14px;
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    height: 220px;
+    box-sizing: border-box;
+
+    &__avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background-color: #d8d8d8;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__texto {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    &__cliente {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: $orange;
+    }
+
+    // ── Center (active) ──────────────────────────
+    &.tslide--center {
+        width: 360px;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        z-index: 5;
+    }
+
+    // ── Left ─────────────────────────────────────
+    &.tslide--left {
+        width: 360px;
+        transform: translate(calc(-50% - 380px), -50%) scale(1);
+        opacity: 0.5;
+        z-index: 3;
+    }
+
+    // ── Right ────────────────────────────────────
+    &.tslide--right {
+        width: 360px;
+        transform: translate(calc(-50% + 380px), -50%) scale(1);
+        opacity: 0.5;
+        z-index: 3;
+    }
+
+    // ── Far left ─────────────────────────────────
+    &.tslide--far-left {
+        width: 360px;
+        transform: translate(calc(-50% - 760px), -50%) scale(1);
+        opacity: 0.25;
+        z-index: 1;
+    }
+
+    // ── Far right ────────────────────────────────
+    &.tslide--far-right {
+        width: 360px;
+        transform: translate(calc(-50% + 760px), -50%) scale(1);
+        opacity: 0.25;
+        z-index: 1;
+    }
+
+    // ── Hidden ───────────────────────────────────
+    &.tslide--hidden {
+        width: 360px;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+/* ── Testimonios: responsive ─────────────────── */
+@media (max-width: 768px) {
+    .testimonios__slider {
+        height: 260px;
+    }
+
+    .testimonio-card {
+        &.tslide--center {
+            width: 260px;
+        }
+
+        &.tslide--left {
+            width: 220px;
+            transform: translate(calc(-50% - 210px), -50%) scale(0.85);
+        }
+
+        &.tslide--right {
+            width: 220px;
+            transform: translate(calc(-50% + 210px), -50%) scale(0.85);
+        }
+
+        &.tslide--far-left,
+        &.tslide--far-right {
+            opacity: 0;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonio-card {
+        &.tslide--center {
+            width: 240px;
+        }
+
+        &.tslide--left,
+        &.tslide--right {
+            opacity: 0.3;
+            width: 180px;
+        }
+
+        &.tslide--left {
+            transform: translate(calc(-50% - 170px), -50%) scale(0.8);
+        }
+
+        &.tslide--right {
+            transform: translate(calc(-50% + 170px), -50%) scale(0.8);
+        }
+    }
+}
