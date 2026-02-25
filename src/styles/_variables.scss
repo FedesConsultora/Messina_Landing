@@ -1,7 +1,13 @@
-// Variables de colores
-$primary-color: #646cff;
-$secondary-color: #535bf2;
-$bg-color: #ffffff;
-$text-color: rgba(0, 0, 0, 0.87);
+// ─── Brand Colors ──────────────────────────────────────────────
+$orange: #E07020;
+$orange-dark: #C45E10;
+$blue-bar: #1A4FA0; // top info bar
+$navy: #0F1822; // navbar background
+$hero-overlay: rgba(0, 0, 0, 0.55);
 
-$font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+// ─── Text ──────────────────────────────────────────────────────
+$white: #FFFFFF;
+$gray-light: rgba(255, 255, 255, 0.75);
+
+// ─── Typography ────────────────────────────────────────────────
+$font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
