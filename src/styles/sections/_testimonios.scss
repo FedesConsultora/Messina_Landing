@@ -38,19 +38,20 @@
         }
     }
 
-    // ── Slider wrapper ───────────────────────────
     &__slider-wrapper {
         width: 100%;
         position: relative;
-        padding: 0 2rem;
+        padding: 0rem 2rem 0rem 2rem; // Headroom for the avatar top overlap
     }
 
     &__slider {
         position: relative;
-        height: 340px;
+        height: 500px; // Very generous height to prevent any possible vertical clipping
         max-width: 1200px;
         margin: 0 auto;
-        overflow: hidden;
+        overflow: visible; // Allow the avatar to peek out vertically
+        // Apply the fade mask ONLY to the horizontal axis by using a separate container logic if needed, 
+        // but for now, let's ensure the mask doesn't clip the top/bottom by making the container taller.
         mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
     }
@@ -128,16 +129,18 @@
     z-index: 1;
     pointer-events: auto;
 
-    background-color: #1A243D;
-    border-radius: 14px;
-    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    background-color: #1A243D; // Restore background to the card
+    border-radius: 20px;
+    padding: 3rem 1.5rem 2rem 1.5rem; // Increased top padding for the avatar
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: flex-start;
+    gap: 1.2rem;
     text-align: center;
-    height: 220px;
     box-sizing: border-box;
+    overflow: visible; // Allow avatar to peek out
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); // Added some depth
 
     &__avatar {
         width: 56px;
@@ -164,9 +167,12 @@
         color: $orange;
     }
 
-    // ── Center (active) ──────────────────────────
     &.tslide--center {
-        width: 360px;
+        width: 480px;
+        max-width: 85vw;
+        aspect-ratio: 1.33; // 480/360 - squarer shape
+        height: auto;
+        border-radius: 20px;
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
         z-index: 5;
@@ -174,42 +180,35 @@
 
     // ── Left ─────────────────────────────────────
     &.tslide--left {
-        width: 360px;
-        transform: translate(calc(-50% - 380px), -50%) scale(1);
+        width: 390px;
+        max-width: 70vw;
+        aspect-ratio: 1.33;
+        height: auto;
+        transform: translate(calc(-50% - 410px), -50%) scale(0.95);
         opacity: 0.5;
         z-index: 3;
     }
 
     // ── Right ────────────────────────────────────
     &.tslide--right {
-        width: 360px;
-        transform: translate(calc(-50% + 380px), -50%) scale(1);
+        width: 390px;
+        max-width: 70vw;
+        aspect-ratio: 1.33;
+        height: auto;
+        transform: translate(calc(-50% + 410px), -50%) scale(0.95);
         opacity: 0.5;
         z-index: 3;
     }
 
-    // ── Far left ─────────────────────────────────
-    &.tslide--far-left {
-        width: 360px;
-        transform: translate(calc(-50% - 760px), -50%) scale(1);
-        opacity: 0.25;
-        z-index: 1;
-    }
-
-    // ── Far right ────────────────────────────────
-    &.tslide--far-right {
-        width: 360px;
-        transform: translate(calc(-50% + 760px), -50%) scale(1);
-        opacity: 0.25;
-        z-index: 1;
-    }
-
-    // ── Hidden ───────────────────────────────────
+    // ── Hidden (Emerge Point) ────────────────────
     &.tslide--hidden {
-        width: 360px;
-        transform: translate(-50%, -50%) scale(1);
+        width: 390px;
+        max-width: 70vw;
+        aspect-ratio: 1.33;
+        height: auto;
+        transform: translate(-50%, -50%) scale(0.85);
         opacity: 0;
-        z-index: 0;
+        z-index: 1;
     }
 }
 
@@ -221,7 +220,7 @@
 
     .testimonios__header {
         padding: 0 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .testimonios__title {
@@ -229,18 +228,19 @@
     }
 
     .testimonios__slider-wrapper {
-        padding: 0 0.5rem;
+        padding: 4rem 0.5rem 2rem 0.5rem; // Headroom for mobile
     }
 
     .testimonios__slider {
-        height: 280px;
+        height: 520px; // Very generous height to prevent any possible clipping
+        overflow: visible;
         mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
     }
 
     .testimonio-card {
-        height: 200px;
-        padding: 2rem;
+        height: auto;
+        padding: 2.5rem 1.5rem 1.5rem 1.5rem;
 
         &__texto {
             font-size: 0.84rem;
@@ -253,24 +253,29 @@
         }
 
         &.tslide--center {
-            width: 70vw;
+            width: 85vw;
+            z-index: 5;
         }
 
         &.tslide--left {
-            width: 65vw;
-            transform: translate(calc(-50% - 52vw), -50%) scale(0.92);
-            opacity: 0.45;
+            width: 75vw;
+            transform: translate(calc(-50% - 62vw), -50%) scale(0.9);
+            opacity: 0.55;
+            z-index: 3;
         }
 
         &.tslide--right {
-            width: 65vw;
-            transform: translate(calc(-50% + 52vw), -50%) scale(0.92);
-            opacity: 0.45;
+            width: 75vw;
+            transform: translate(calc(-50% + 62vw), -50%) scale(0.9);
+            opacity: 0.55;
+            z-index: 3;
         }
 
-        &.tslide--far-left,
-        &.tslide--far-right {
+        &.tslide--hidden {
+            width: 75vw;
+            transform: translate(-50%, -50%) scale(0.85);
             opacity: 0;
+            z-index: 1;
         }
     }
 
@@ -281,43 +286,33 @@
 
 @media (max-width: 480px) {
     .testimonio-card {
-        height: 190px;
-        padding: 1.8rem 1rem 1rem;
+        height: auto;
+        min-height: 200px;
+        padding: 2.8rem 1.2rem 1.2rem;
 
         &.tslide--center {
-            width: 75vw;
+            width: 88vw;
         }
 
-        &.tslide--left {
-            width: 68vw;
-            transform: translate(calc(-50% - 55vw), -50%) scale(0.88);
-            opacity: 0.35;
-        }
-
+        &.tslide--left,
         &.tslide--right {
-            width: 68vw;
-            transform: translate(calc(-50% + 55vw), -50%) scale(0.88);
-            opacity: 0.35;
+            opacity: 0.3;
         }
     }
 }
 
 @media (max-width: 360px) {
     .testimonio-card {
-        height: 185px;
+        height: auto;
+        min-height: 180px;
 
         &.tslide--center {
-            width: 78vw;
+            width: 90vw;
         }
 
-        &.tslide--left {
-            width: 70vw;
-            transform: translate(calc(-50% - 57vw), -50%) scale(0.85);
-        }
-
+        &.tslide--left,
         &.tslide--right {
-            width: 70vw;
-            transform: translate(calc(-50% + 57vw), -50%) scale(0.85);
+            opacity: 0.25;
         }
     }
 }

@@ -137,8 +137,8 @@ const Navbar = () => {
                                 href={`#${id}`}
                                 className={activeSection === id ? 'nav-active' : ''}
                                 onClick={() => scrollTo(id)}
-                            >
-                                {id.charAt(0).toUpperCase() + id.slice(1)}
+                            > {activeSection === id ? "●" : ""}
+                                {""} {""} {id.charAt(0).toUpperCase() + id.slice(1)}
                             </a>
                         </li>
                     ))}

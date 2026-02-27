@@ -59,11 +59,10 @@ const Proyectos = () => {
         return () => clearInterval(timer);
     }, [next]);
 
-    // Compute visible indices: [farPrev, prev, current, next, farNext]
+    // Compute visible indices: [prev, current, next]
+    // All other indices will get slide--hidden and be parked under the center
     const prevIndex = (current - 1 + total) % total;
     const nextIndex = (current + 1) % total;
-    const farPrevIndex = (current - 2 + total) % total;
-    const farNextIndex = (current + 2) % total;
 
     return (
         <section id="proyectos" className="proyectos">
@@ -94,8 +93,6 @@ const Proyectos = () => {
                             if (i === current) posClass = 'slide--center';
                             else if (i === prevIndex) posClass = 'slide--left';
                             else if (i === nextIndex) posClass = 'slide--right';
-                            else if (i === farPrevIndex) posClass = 'slide--far-left';
-                            else if (i === farNextIndex) posClass = 'slide--far-right';
 
                             return (
                                 <div

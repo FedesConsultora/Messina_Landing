@@ -71,8 +71,6 @@ const Testimonios = () => {
     // Compute visible positions
     const prevIndex = (current - 1 + total) % total;
     const nextIndex = (current + 1) % total;
-    const farPrevIndex = (current - 2 + total) % total;
-    const farNextIndex = (current + 2) % total;
 
     return (
         <section id="testimonios" className="testimonios">
@@ -96,8 +94,6 @@ const Testimonios = () => {
                         if (i === current) posClass = 'tslide--center';
                         else if (i === prevIndex) posClass = 'tslide--left';
                         else if (i === nextIndex) posClass = 'tslide--right';
-                        else if (i === farPrevIndex) posClass = 'tslide--far-left';
-                        else if (i === farNextIndex) posClass = 'tslide--far-right';
 
                         return (
                             <div

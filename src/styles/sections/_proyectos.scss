@@ -20,7 +20,7 @@
     &__header {
         max-width: 700px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 2rem;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -156,7 +156,7 @@
     // ── Quote (below the fold) ────────────────────
     &__quote {
         background-color: $navy;
-        padding: 6rem 2rem;
+        padding: 2rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -192,66 +192,72 @@
     z-index: 1;
     pointer-events: auto;
 
+    overflow: hidden !important;
+    border-radius: 24px !important;
+    mask-image: radial-gradient(white, black); // Standard 
+    -webkit-mask-image: -webkit-radial-gradient(white, black); // Fixes many border-radius/overflow bugs
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+
+    img {
+        border-radius: 24px !important;
+    }
+
     &__img {
         width: 100%;
         height: 100%;
         background-color: #d8d8d8;
-        border-radius: 12px;
+        border-radius: 24px !important;
+        object-fit: cover;
     }
 
     // ── Center (active slide) ────────────────────
     &.slide--center {
-        width: 380px;
-        height: 260px;
+        width: 600px;
+        max-width: 85vw;
+        aspect-ratio: 1.7;
+        height: auto;
+        border-radius: 24px !important;
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
         z-index: 5;
         pointer-events: auto;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); // Add shadow to center slide for premium feel
     }
 
     // ── Left (previous slide) ────────────────────
     &.slide--left {
-        width: 280px;
-        height: 200px;
-        transform: translate(calc(-50% - 310px), -50%) scale(0.9);
+        width: 440px;
+        max-width: 70vw;
+        aspect-ratio: 1.57; // 440/280
+        height: auto;
+        transform: translate(calc(-50% - 380px), -50%) scale(0.9);
         opacity: 0.6;
         z-index: 3;
     }
 
     // ── Right (next slide) ───────────────────────
     &.slide--right {
-        width: 280px;
-        height: 200px;
-        transform: translate(calc(-50% + 310px), -50%) scale(0.9);
+        width: 440px;
+        max-width: 70vw;
+        aspect-ratio: 1.57; // 440/280
+        height: auto;
+        transform: translate(calc(-50% + 380px), -50%) scale(0.9);
         opacity: 0.6;
         z-index: 3;
     }
 
-    // ── Far left ─────────────────────────────────
-    &.slide--far-left {
-        width: 220px;
-        height: 160px;
-        transform: translate(calc(-50% - 560px), -50%) scale(0.8);
-        opacity: 0.3;
-        z-index: 1;
-    }
-
-    // ── Far right ────────────────────────────────
-    &.slide--far-right {
-        width: 220px;
-        height: 160px;
-        transform: translate(calc(-50% + 560px), -50%) scale(0.8);
-        opacity: 0.3;
-        z-index: 1;
-    }
-
-    // ── Hidden slides ────────────────────────────
+    // ── Hidden slides (emerge point) ─────────────
     &.slide--hidden {
-        width: 200px;
-        height: 160px;
-        transform: translate(-50%, -50%) scale(0.6);
+        width: 440px;
+        max-width: 70vw;
+        aspect-ratio: 1.57; // 440/280
+        height: auto;
+        transform: translate(-50%, -50%) scale(0.85);
         opacity: 0;
-        z-index: 0;
+        z-index: 1;
     }
 }
 
@@ -280,7 +286,7 @@
     }
 
     .proyectos__slider {
-        height: 220px;
+        height: 280px;
         max-width: 100%;
         mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
@@ -288,27 +294,37 @@
 
     .proyecto-slide {
         &.slide--center {
-            width: 60vw;
-            height: 190px;
+            width: 80vw;
+            height: auto;
+            aspect-ratio: 1.5;
+            z-index: 5;
         }
 
         &.slide--left {
-            width: 50vw;
-            height: 160px;
-            transform: translate(calc(-50% - 42vw), -50%) scale(0.9);
+            width: 70vw;
+            height: auto;
+            aspect-ratio: 1.57;
+            transform: translate(calc(-50% - 70vw), -50%) scale(0.9);
             opacity: 0.5;
+            z-index: 3;
         }
 
         &.slide--right {
-            width: 50vw;
-            height: 160px;
-            transform: translate(calc(-50% + 42vw), -50%) scale(0.9);
+            width: 70vw;
+            height: auto;
+            aspect-ratio: 1.57;
+            transform: translate(calc(-50% + 70vw), -50%) scale(0.9);
             opacity: 0.5;
+            z-index: 3;
         }
 
-        &.slide--far-left,
-        &.slide--far-right {
+        &.slide--hidden {
+            width: 70vw;
+            height: auto;
+            aspect-ratio: 1.57;
+            transform: translate(-50%, -50%) scale(0.85);
             opacity: 0;
+            z-index: 1;
         }
     }
 
@@ -326,7 +342,7 @@
     }
 
     .proyectos__quote {
-        padding: 3.5rem 1.5rem;
+        padding: 2rem;
     }
 
     .proyectos__quote-text {
@@ -337,20 +353,20 @@
 @media (max-width: 480px) {
     .proyecto-slide {
         &.slide--center {
-            width: 65vw;
-            height: 170px;
+            width: 85vw;
+            height: 260px;
         }
 
         &.slide--left {
             width: 55vw;
-            height: 140px;
+            height: 170px;
             transform: translate(calc(-50% - 45vw), -50%) scale(0.85);
             opacity: 0.4;
         }
 
         &.slide--right {
             width: 55vw;
-            height: 140px;
+            height: 170px;
             transform: translate(calc(-50% + 45vw), -50%) scale(0.85);
             opacity: 0.4;
         }
