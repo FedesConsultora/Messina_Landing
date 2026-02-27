@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import Layout from './components/Layout'
 
-// ── Lazy-loaded sections (code splitting por ruta) ─────────────
+// ── Lazy-loaded sections (code splitting) ─────────────────────
 const Hero = lazy(() => import('./components/sections/Hero'))
 const Nosotros = lazy(() => import('./components/sections/Nosotros'))
 const Servicios = lazy(() => import('./components/sections/Servicios'))
@@ -24,15 +24,13 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-            <Route path="/servicios" element={<Servicios />} />
-            <Route path="/ventajas" element={<Ventajas />} />
-            <Route path="/proyectos" element={<Proyectos />} />
-            <Route path="/testimonios" element={<Testimonios />} />
-            <Route path="/contacto" element={<Contacto />} />
-          </Routes>
+          <Hero />
+          <Nosotros />
+          <Servicios />
+          <Ventajas />
+          <Proyectos />
+          <Testimonios />
+          <Contacto />
         </Suspense>
       </Layout>
     </BrowserRouter>

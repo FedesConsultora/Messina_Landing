@@ -54,7 +54,7 @@
 
 /* ── Servicio Card ─────────────────────────── */
 .servicio-card {
-    background-color: #0f1d2e;
+    background-color: #1A243D;
     border-radius: 14px;
     padding: 1.2rem;
     display: flex;
@@ -92,16 +92,65 @@
 }
 
 /* ── Servicios: responsive ─────────────────── */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
+    .servicios {
+        padding: 3rem 0;
+        min-height: auto !important;
+        justify-content: flex-start;
+    }
+
     .servicios__inner {
         grid-template-columns: 1fr;
+        padding: 0 2rem;
+        gap: 2rem;
     }
 
     .servicios__left {
         position: static;
+        gap: 0.8rem;
+    }
+
+    .servicios__label {
+        padding-left: 0;
+    }
+
+    .servicios__title {
+        padding-left: 0;
+        font-size: clamp(2.4rem, 8vw, 3rem);
     }
 
     .servicios__grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .servicio-card {
+        padding: 1.4rem;
+    }
+
+    .servicio-card__img {
+        height: 190px;
+    }
+
+    .servicio-card__titulo {
+        font-size: 1.1rem;
+    }
+
+    .servicio-card__desc {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .servicios__inner {
+        padding: 0 1.5rem;
+    }
+
+    .servicio-card {
+        padding: 1.2rem;
+    }
+
+    .servicio-card__img {
+        height: 160px;
     }
 }

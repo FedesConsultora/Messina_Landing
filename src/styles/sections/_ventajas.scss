@@ -5,8 +5,11 @@
 ═══════════════════════════════════════════════ */
 .ventajas {
     width: 100%;
-    background-color: $navy;
+    background-color: #1A243D;
+    height: 100dvh;
     padding: 5rem 0;
+    display: flex;
+    align-items: center;
 
     &__inner {
         max-width: 1440px;
@@ -77,13 +80,57 @@
 
 /* ── Ventajas: responsive ────────────────────── */
 @media (max-width: 768px) {
+    .ventajas {
+        padding: 0 0 4rem 0;
+        height: auto !important;
+        min-height: auto !important;
+        display: block; // breaks the align-items: center from desktop that causes overflow
+    }
+
     .ventajas__inner {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+        padding: 0;
+        display: block; // switches off grid/flex to stack normally
     }
 
     .ventajas__img-placeholder {
-        aspect-ratio: 16 / 9;
-        max-height: 240px;
+        aspect-ratio: auto;
+        max-height: none;
+        height: 65vh;
+        border-radius: 0;
+        width: 100%;
+        margin-bottom: 3rem;
+    }
+
+    .ventajas__content {
+        padding: 0 1.5rem;
+    }
+
+    .ventajas__title {
+        font-size: clamp(2.4rem, 8vw, 3rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .ventajas__list {
+        gap: 1.2rem;
+    }
+
+    .ventaja-item__titulo {
+        font-size: 1.1rem;
+    }
+
+    .ventaja-item__desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .ventajas__img-placeholder {
+        height: 45vh;
+    }
+
+    .ventajas__content {
+        padding: 0 1.2rem;
     }
 }

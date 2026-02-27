@@ -75,7 +75,7 @@ const Testimonios = () => {
     const farNextIndex = (current + 2) % total;
 
     return (
-        <section className="testimonios">
+        <section id="testimonios" className="testimonios">
             {/* ── Header centrado ── */}
             <div className="testimonios__header">
                 <span className="testimonios__label">Testimonios</span>

@@ -78,17 +78,62 @@
 }
 
 /* ── Nosotros: responsive ─────────────────────── */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .nosotros {
         padding: 3rem 0;
+        justify-content: flex-start;
+        min-height: auto !important;
 
         &__top {
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 0.6rem;
+            padding: 0 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        &__label-col {
+            padding-left: 0;
+            padding-top: 0;
+        }
+
+        &__title {
+            font-size: clamp(2.4rem, 8vw, 3rem);
+            margin-bottom: 0.3rem;
+        }
+
+        &__body {
+            font-size: 0.9rem;
+            max-width: 100%;
         }
 
         &__images {
             grid-template-columns: 1fr;
+            padding: 0 1.5rem;
+            gap: 0.8rem;
+            margin: .5rem;
         }
+
+        &__img-placeholder {
+            height: 220px;
+            border-radius: 8px;
+
+            &:first-child {
+                width: calc(100% - 24px);
+            }
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    .nosotros__top {
+        padding: 0 1.2rem;
+    }
+
+    .nosotros__images {
+        padding: 0 1.2rem;
+    }
+
+    .nosotros__img-placeholder {
+        height: 170px;
     }
 }

@@ -29,7 +29,7 @@ const serviciosList = [
 ];
 
 const Servicios = () => (
-    <section className="servicios">
+    <section id="servicios" className="servicios">
         <div className="servicios__inner">
             {/* ── Left: label + title ── */}
             <div className="servicios__left">
@@ -47,7 +47,7 @@ const Servicios = () => (
                         <h3 className="servicio-card__titulo">{s.titulo}</h3>
                         <div className="servicio-card__img" aria-label={`Imagen ${s.titulo}`} />
                         <p className="servicio-card__desc">{s.descripcion}</p>
-                        <a href="/contacto" className="btn btn--primary servicio-card__btn">
+                        <a href="https://wa.me/5492345689621" target="_blank" rel="noopener noreferrer" className="btn btn--primary servicio-card__btn">
                             Solicitar Presupuesto <CircleArrow />
                         </a>
                     </div>

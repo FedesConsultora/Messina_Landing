@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
             <div className="topbar">
                 <div className="topbar__inner">
                     <span className="topbar__item"><CircleCheck /> 8:00 a 15:00 hrs</span>
-                    <span className="topbar__item"><CircleCheck /> +123 456 7890</span>
+                    <span className="topbar__item"><CircleCheck />+54 9 2345 68‑9621</span>
                     <span className="topbar__item"><CircleCheck /> Dirección</span>
                 </div>
             </div>

@@ -66,7 +66,7 @@ const Proyectos = () => {
     const farNextIndex = (current + 2) % total;
 
     return (
-        <section className="proyectos">
+        <section id="proyectos" className="proyectos">
 
             {/* ── Above the fold: fills viewport ── */}
             <div className="proyectos__above-fold">
@@ -151,9 +151,8 @@ const Proyectos = () => {
             {/* ── Quote (below the fold – only visible after scroll) ── */}
             <div className="proyectos__quote">
                 <blockquote className="proyectos__quote-text">
-                    "<span className="q-orange">Cada proyecto</span> refleja nuestra obsesión por la{' '}
-                    <span className="q-orange">durabilidad</span> y el detalle. No entregamos nada que{' '}
-                    <span className="q-orange">no cumpla</span> con nuestros estándares de tres generaciones."
+                    "Cada proyecto refleja nuestra obsesión por la durabilidad y el detalle.{' '}
+                    No entregamos nada que no cumpla con nuestros estándares de tres generaciones."
                 </blockquote>
             </div>
 

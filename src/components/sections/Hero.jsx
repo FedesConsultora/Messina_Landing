@@ -7,7 +7,7 @@ const ArrowIcon = () => (
 );
 
 const Hero = () => (
-    <section className="hero">
+    <section id="inicio" className="hero">
         <div className="hero__bg">
             <img src={heroBg} alt="" />
         </div>
@@ -26,10 +26,10 @@ const Hero = () => (
             </p>
 
             <div className="hero__actions">
-                <a href="/contacto" className="btn btn--primary">
+                <a href="https://wa.me/5492345689621" target="_blank" rel="noopener noreferrer" className="btn btn--primary">
                     Solicitar Presupuesto <ArrowIcon />
                 </a>
-                <a href="/servicios" className="btn btn--outline">
+                <a href="#servicios" className="btn btn--outline">
                     Mirá todos nuestros servicios
                 </a>
             </div>

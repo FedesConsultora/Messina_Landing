@@ -17,7 +17,7 @@ const ventajasList = [
 ];
 
 const Ventajas = () => (
-    <section className="ventajas">
+    <section id="ventajas" className="ventajas">
         <div className="ventajas__inner">
             {/* ── Left: image placeholder ── */}
             <div className="ventajas__img-placeholder" aria-label="Imagen ventajas" />

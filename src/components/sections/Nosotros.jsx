@@ -1,5 +1,5 @@
 const Nosotros = () => (
-    <section className="nosotros">
+    <section id="nosotros" className="nosotros">
         {/* ── Top: label + heading + text ── */}
         <div className="nosotros__top">
             <div className="nosotros__label-col">

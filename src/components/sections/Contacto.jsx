@@ -1,5 +1,5 @@
 const Contacto = () => (
-    <section className="section">
+    <section id="contacto" className="section">
         <h1>Contacto</h1>
     </section>
 );
