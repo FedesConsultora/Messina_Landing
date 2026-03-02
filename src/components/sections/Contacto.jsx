@@ -32,7 +32,7 @@ const Footer = () => (
                 </a>
 
                 <a
-                    href="https://instagram.com/"
+                    href="https://www.instagram.com/metalurgica.messina/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer__social-link"

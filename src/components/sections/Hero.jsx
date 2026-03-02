@@ -1,4 +1,5 @@
 import heroBg from "../../assets/img/background-1.png";
+import heroVideo from "../../assets/img/messina.mp4";
 
 const ArrowIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,7 +10,14 @@ const ArrowIcon = () => (
 const Hero = () => (
     <section id="inicio" className="hero">
         <div className="hero__bg">
-            <img src={heroBg} alt="" />
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster={heroBg}
+                src={heroVideo}
+            />
         </div>
 
         <div className="hero__content">

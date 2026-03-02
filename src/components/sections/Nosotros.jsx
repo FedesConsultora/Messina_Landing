@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 import img1 from '../../assets/img/nosotros/IMG_9882.webp';
 import img4 from '../../assets/img/nosotros/111.webp';
 import img2 from '../../assets/img/nosotros/Secuencia 01.00_00_53_06.Imagen fija001.webp';
-import img3 from '../../assets/img/nosotros/Secuencia 01.00_00_53_06.Imagen fija005.webp';
 
 // Split images between two slots — 2 per slot
 const SLOT1_IMAGES = [img1, img4];
-const SLOT2_IMAGES = [img2, img3];
+const SLOT2_IMAGES = [img2];
 
 const INTERVAL_MS = 4000;
 
