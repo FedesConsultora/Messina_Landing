@@ -222,7 +222,7 @@
 
     .testimonios__header {
         padding: 0 1.5rem;
-        margin-bottom: 1rem;
+
     }
 
     .testimonios__title {
@@ -230,11 +230,11 @@
     }
 
     .testimonios__slider-wrapper {
-        padding: 4rem 0.5rem 2rem 0.5rem; // Headroom for mobile
+        padding: 0rem 0.5rem 2rem 0.5rem; // Headroom for mobile
     }
 
     .testimonios__slider {
-        height: 520px; // Very generous height to prevent any possible clipping
+        max-height: 520px; // Very generous height to prevent any possible clipping
         overflow: visible;
         mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
@@ -247,7 +247,7 @@
         &__texto {
             font-size: 0.84rem;
             line-height: 1.55;
-            padding: 1rem .5rem 0rem .5rem;
+            padding: 0rem .5rem 0rem .5rem;
         }
 
         &__cliente {

@@ -44,6 +44,16 @@
             opacity: 0.9;
         }
     }
+
+    &__item--link {
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $white;
+            text-decoration: underline;
+        }
+    }
 }
 
 /* ═══════════════════════════════════════════════

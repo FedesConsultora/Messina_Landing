@@ -45,7 +45,7 @@ const testimoniosList = [
 
     {
         id: 5,
-        texto: '"Conozco a la familia desde hace años. Cuando les encargo una estructura, sé que va a durar toda la vida. Son directos y saben lo que hacen."',
+        texto: '"Les encargamos bebederos rurales para el campo y el resultado fue excelente. Vinieron a medir, nos asesoraron con el diseño y la terminación de las soldaduras es impecable. Gente seria y cumplidora."',
         cliente: 'Cliente 5'
     },
 
@@ -74,34 +74,67 @@ const AUTOPLAY_MS = 5000;
 const Testimonios = () => {
     const [current, setCurrent] = useState(0);
     const total = testimoniosList.length;
+    const isPaused = useRef(false);
 
-    const goTo = useCallback((index, dir) => {
-        setCurrent(index);
-    }, []);
-
-    const next = useCallback(() => {
+    const moveNext = useCallback(() => {
         setCurrent((prev) => (prev + 1) % total);
     }, [total]);
 
-    const prev = useCallback(() => {
+    const movePrev = useCallback(() => {
         setCurrent((prev) => (prev - 1 + total) % total);
     }, [total]);
 
-    // Autoplay (pauses on hover)
+    const goTo = useCallback((index) => {
+        setCurrent(index);
+        isPaused.current = true;
+    }, []);
+
+    const next = useCallback(() => {
+        moveNext();
+        isPaused.current = true;
+    }, [moveNext]);
+
+    const prev = useCallback(() => {
+        movePrev();
+        isPaused.current = true;
+    }, [movePrev]);
+
+    const sectionRef = useRef(null);
+
+    // Intersection Observer to resume animation when returning to the section
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // If the section leaves the viewport (isIntersecting: false),
+                // we reset the paused state so it moves again next time it's seen.
+                if (!entry.isIntersecting) {
+                    isPaused.current = false;
+                }
+            },
+            { threshold: 0 }
+        );
+
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    // Autoplay (pauses on hover or after interaction)
     const isHovered = useRef(false);
     useEffect(() => {
         const timer = setInterval(() => {
-            if (!isHovered.current) next();
+            if (!isHovered.current && !isPaused.current) {
+                setCurrent((prev) => (prev + 1) % total);
+            }
         }, AUTOPLAY_MS);
         return () => clearInterval(timer);
-    }, [next]);
+    }, [total]);
 
     // Compute visible positions
     const prevIndex = (current - 1 + total) % total;
     const nextIndex = (current + 1) % total;
 
     return (
-        <section id="testimonios" className="testimonios">
+        <section id="testimonios" className="testimonios" ref={sectionRef}>
             {/* ── Header centrado ── */}
             <div className="testimonios__header">
                 <span className="testimonios__label">Testimonios</span>
