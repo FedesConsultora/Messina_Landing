@@ -62,16 +62,28 @@ const serviciosList = [
 const INTERVAL_MS = 4000;
 
 /** A single image area that crossfades when there are multiple images. */
-const FadeImage = ({ images, label }) => {
+const FadeImage = ({ images, label, delay = 0 }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         if (images.length <= 1) return;
-        const timer = setInterval(() => {
+        // Stagger the start so cards don't all switch at once
+        const timeout = setTimeout(() => {
             setActiveIndex((prev) => (prev + 1) % images.length);
-        }, INTERVAL_MS);
-        return () => clearInterval(timer);
-    }, [images.length]);
+        }, delay);
+
+        const timer = setTimeout(() => {
+            const interval = setInterval(() => {
+                setActiveIndex((prev) => (prev + 1) % images.length);
+            }, INTERVAL_MS);
+            return () => clearInterval(interval);
+        }, delay);
+
+        return () => {
+            clearTimeout(timeout);
+            clearTimeout(timer);
+        };
+    }, [images.length, delay]);
 
     // Single image — no fade needed
     if (images.length === 1) {
@@ -112,10 +124,10 @@ const Servicios = () => (
 
             {/* ── Right: 2×2 card grid ── */}
             <div className="servicios__grid">
-                {serviciosList.map((s) => (
+                {serviciosList.map((s, idx) => (
                     <div key={s.id} className="servicio-card">
                         <h3 className="servicio-card__titulo">{s.titulo}</h3>
-                        <FadeImage images={s.images} label={s.titulo} />
+                        <FadeImage images={s.images} label={s.titulo} delay={idx * 1000} />
                         <p className="servicio-card__desc">{s.descripcion}</p>
                         <a href="https://wa.me/5492345689621" target="_blank" rel="noopener noreferrer" className="btn btn--primary servicio-card__btn">
                             Solicitar Presupuesto <CircleArrow />

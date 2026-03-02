@@ -163,14 +163,12 @@
     }
 
     &__quote-text {
-        font-size: clamp(1.3rem, 3vw, 1.85rem);
+        font-size: clamp(1.4rem, 3vw, 1.85rem);
         font-weight: 700;
-        font-style: italic;
-        line-height: 1.55;
+        line-height: 1.1;
         text-align: center;
-        max-width: 560px;
+        max-width: 700px;
         margin: 0;
-
         background: linear-gradient(to right, #11A0FF, #EB8223);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -342,7 +340,7 @@
     }
 
     .proyectos__quote {
-        padding: 2rem;
+        padding: 2.5rem;
     }
 
     .proyectos__quote-text {
@@ -373,7 +371,7 @@
     }
 
     .proyectos__quote {
-        padding: 2.5rem 1.2rem;
+        padding: 2.5rem;
     }
 }
 

@@ -5,23 +5,36 @@ import img4 from '../../assets/img/nosotros/111.webp';
 import img2 from '../../assets/img/nosotros/Secuencia 01.00_00_53_06.Imagen fija001.webp';
 import img3 from '../../assets/img/nosotros/Secuencia 01.00_00_53_06.Imagen fija005.webp';
 
-const ALL_IMAGES = [img1, img4, img2, img3];
+// Split images between two slots — 2 per slot
+const SLOT1_IMAGES = [img1, img4];
+const SLOT2_IMAGES = [img2, img3];
 
-// First image is always static (slot 1), the rest cycle in slot 2
-const STATIC_IMAGE = ALL_IMAGES[0];
-const CYCLING_IMAGES = ALL_IMAGES.slice(1);
-
-const INTERVAL_MS = 4000; // time each image stays visible
+const INTERVAL_MS = 4000;
 
 const Nosotros = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [index1, setIndex1] = useState(0);
+    const [index2, setIndex2] = useState(0);
 
+    // Slot 1 cycling
     useEffect(() => {
-        if (CYCLING_IMAGES.length <= 1) return; // no need to cycle
+        if (SLOT1_IMAGES.length <= 1) return;
         const timer = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % CYCLING_IMAGES.length);
+            setIndex1((prev) => (prev + 1) % SLOT1_IMAGES.length);
         }, INTERVAL_MS);
         return () => clearInterval(timer);
+    }, []);
+
+    // Slot 2 cycling — staggered by 2s so they don't switch at the same time
+    useEffect(() => {
+        if (SLOT2_IMAGES.length <= 1) return;
+        const timeout = setTimeout(() => {
+            setIndex2((prev) => (prev + 1) % SLOT2_IMAGES.length);
+            const timer = setInterval(() => {
+                setIndex2((prev) => (prev + 1) % SLOT2_IMAGES.length);
+            }, INTERVAL_MS);
+            return () => clearInterval(timer);
+        }, 2000);
+        return () => clearTimeout(timeout);
     }, []);
 
     return (
@@ -49,25 +62,29 @@ const Nosotros = () => {
                 </div>
             </div>
 
-            {/* ── Bottom: two image slots ── */}
+            {/* ── Bottom: two image slots, both cycling ── */}
             <div className="nosotros__images">
-                {/* Slot 1 — static image */}
-                <div className="nosotros__img-slot">
-                    <img
-                        src={STATIC_IMAGE}
-                        alt="Messina — equipo de trabajo"
-                        className="nosotros__img"
-                    />
-                </div>
-
-                {/* Slot 2 — cycling images with crossfade */}
+                {/* Slot 1 */}
                 <div className="nosotros__img-slot nosotros__img-slot--cycle">
-                    {CYCLING_IMAGES.map((src, i) => (
+                    {SLOT1_IMAGES.map((src, i) => (
                         <img
                             key={i}
                             src={src}
-                            alt={`Messina — imagen ${i + 2}`}
-                            className={`nosotros__img nosotros__img--fade ${i === activeIndex ? 'nosotros__img--visible' : ''
+                            alt={`Messina — imagen ${i + 1}`}
+                            className={`nosotros__img nosotros__img--fade ${i === index1 ? 'nosotros__img--visible' : ''
+                                }`}
+                        />
+                    ))}
+                </div>
+
+                {/* Slot 2 */}
+                <div className="nosotros__img-slot nosotros__img-slot--cycle">
+                    {SLOT2_IMAGES.map((src, i) => (
+                        <img
+                            key={i}
+                            src={src}
+                            alt={`Messina — imagen ${i + 3}`}
+                            className={`nosotros__img nosotros__img--fade ${i === index2 ? 'nosotros__img--visible' : ''
                                 }`}
                         />
                     ))}
