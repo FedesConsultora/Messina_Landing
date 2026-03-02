@@ -68,12 +68,35 @@
         margin: 0;
     }
 
-    &__img {
+    &__img-slot {
         width: 100%;
         height: 150px;
-        background-color: #d8d8d8;
         border-radius: 10px;
+        overflow: hidden;
         flex-shrink: 0;
+
+        &--cycle {
+            position: relative;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 10px;
+    }
+
+    &__img--fade {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+
+    &__img--visible {
+        opacity: 1;
     }
 
     &__desc {
@@ -128,7 +151,7 @@
         padding: 1.4rem;
     }
 
-    .servicio-card__img {
+    .servicio-card__img-slot {
         height: 190px;
     }
 
@@ -150,7 +173,7 @@
         padding: 1.2rem;
     }
 
-    .servicio-card__img {
+    .servicio-card__img-slot {
         height: 160px;
     }
 }

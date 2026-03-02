@@ -142,8 +142,8 @@
             color: $white;
         }
 
-        &.active {
-            color: $blue-bar;
+        &.nav-active {
+            color: $blue-active;
             font-weight: 500;
         }
     }
@@ -346,7 +346,7 @@
             transition: color 0.2s ease;
 
             &.nav-active {
-                color: $orange;
+                color: $blue-active;
             }
         }
     }

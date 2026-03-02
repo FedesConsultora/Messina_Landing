@@ -21,12 +21,30 @@
         align-items: center;
     }
 
-    &__img-placeholder {
+    // ── Image slot (crossfade container) ─────────
+    &__img-slot {
+        position: relative;
         width: 100%;
         aspect-ratio: 1 / 1.1;
-        background-color: #d8d8d8;
-        border-radius: 14px;
         max-height: 360px;
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    &__img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 14px;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+
+    &__img--visible {
+        opacity: 1;
     }
 
     &__content {
@@ -84,23 +102,27 @@
         padding: 0 0 4rem 0;
         height: auto !important;
         min-height: auto !important;
-        display: block; // breaks the align-items: center from desktop that causes overflow
+        display: block;
     }
 
     .ventajas__inner {
         grid-template-columns: 1fr;
         gap: 2.5rem;
         padding: 0;
-        display: block; // switches off grid/flex to stack normally
+        display: block;
     }
 
-    .ventajas__img-placeholder {
+    .ventajas__img-slot {
         aspect-ratio: auto;
         max-height: none;
         height: 65vh;
         border-radius: 0;
         width: 100%;
         margin-bottom: 3rem;
+    }
+
+    .ventajas__img {
+        border-radius: 0;
     }
 
     .ventajas__content {
@@ -126,7 +148,7 @@
 }
 
 @media (max-width: 380px) {
-    .ventajas__img-placeholder {
+    .ventajas__img-slot {
         height: 45vh;
     }
 

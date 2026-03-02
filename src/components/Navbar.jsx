@@ -57,24 +57,27 @@ const Navbar = () => {
         };
     }, [isMenuOpen]);
 
-    // Detect active section via IntersectionObserver
+    // Detect active section via scroll position
     useEffect(() => {
-        const observers = [];
-        SECTIONS.forEach((id) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(id);
-                    }
-                },
-                { threshold: 0.4 }
-            );
-            observer.observe(el);
-            observers.push(observer);
-        });
-        return () => observers.forEach((o) => o.disconnect());
+        const getActiveSection = () => {
+            const navHeight = document.querySelector('.header')?.offsetHeight ?? 60;
+
+            let current = SECTIONS[0];
+            for (const id of SECTIONS) {
+                const el = document.getElementById(id);
+                if (!el) continue;
+                const rect = el.getBoundingClientRect();
+                // Section top is at or above the bottom of the navbar
+                if (rect.top <= navHeight + 2) {
+                    current = id;
+                }
+            }
+            setActiveSection(current);
+        };
+
+        getActiveSection();
+        window.addEventListener('scroll', getActiveSection, { passive: true });
+        return () => window.removeEventListener('scroll', getActiveSection);
     }, []);
 
     const scrollTo = (id) => {
@@ -137,8 +140,8 @@ const Navbar = () => {
                                 href={`#${id}`}
                                 className={activeSection === id ? 'nav-active' : ''}
                                 onClick={() => scrollTo(id)}
-                            > {activeSection === id ? "●" : ""}
-                                {""} {""} {id.charAt(0).toUpperCase() + id.slice(1)}
+                            >
+                                {id.charAt(0).toUpperCase() + id.slice(1)}
                             </a>
                         </li>
                     ))}
