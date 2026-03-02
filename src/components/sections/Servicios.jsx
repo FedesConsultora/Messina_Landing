@@ -106,8 +106,8 @@ const Servicios = () => (
             <div className="servicios__left">
                 <span className="servicios__label">Servicios</span>
                 <h2 className="servicios__title">
-                    <span className="servicios__title--orange">Soluciones<br />integrales</span><br />
-                    en metal y<br />movimiento
+                    <span className="servicios__title--orange">Soluciones<br />metálicas</span><br />
+                    que combinan estructura y<br />movimiento
                 </h2>
             </div>
 

@@ -144,7 +144,7 @@ const Proyectos = () => {
                         rel="noopener noreferrer"
                         className="btn btn--primary proyectos__cta-btn"
                     >
-                        Consultanos por WhatsApp <WAIcon />
+                        Consultar<WAIcon />
                     </a>
                 </div>
             </div>

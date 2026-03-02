@@ -39,7 +39,7 @@ const Nosotros = () => {
                     <p className="nosotros__body">
                         Somos una empresa familiar que lleva tres generaciones dedicada al oficio del
                         hierro. Nuestra historia se forja en la responsabilidad y el compromiso,
-                        evolucionando desde la herrería tradicional hacia soluciones industriales complejas.
+                        evolucionando desde la herrería tradicional hacia soluciones industriales más complejas.
                     </p>
                     <p className="nosotros__body">
                         Nos define un espíritu de personas capaces, dispuestas a resolver cada situación

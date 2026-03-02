@@ -30,7 +30,7 @@ const Hero = () => (
                     Solicitar Presupuesto <ArrowIcon />
                 </a>
                 <a href="#servicios" className="btn btn--outline">
-                    Mirá todos nuestros servicios
+                    Ver todos nuestros servicios
                 </a>
             </div>
         </div>

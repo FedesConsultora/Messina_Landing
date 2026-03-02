@@ -16,17 +16,17 @@ const ChevronRight = () => (
 const testimoniosList = [
     {
         id: 1,
-        texto: '"Trabajamos con Messina hace más de 10 años. Cada vez que necesitamos algo, sabemos que va a estar bien hecho. Lo que más valoramos es que saben lo que hacen."',
+        texto: '"Conozco a la familia desde hace años. Cuando les encargo una estructura, sé que va a durar toda la vida. Son directos y saben lo que hacen."',
         cliente: 'Cliente 1',
     },
     {
         id: 2,
-        texto: '"Necesitábamos una pieza específica de tornería que ya no se conseguía. En Messina no solo la fabricaron, sino que mejoraron el diseño original. Se nota el oficio."',
+        texto: '"Necesitábamos una pieza específica de tornería que ya no se conseguía. En Messina no solo la fabricaron, sino que mejoraron el diseño original. Se nota el oficio".',
         cliente: 'Cliente 2',
     },
     {
         id: 3,
-        texto: '"Excelente relación calidad-precio. Cumplieron con los plazos pactados y el presupuesto fue justo, sin sorpresas. Es difícil encontrar gente tan responsable hoy en día."',
+        texto: '"Excelente relación calidad-precio. Cumplieron con los plazos pactados y el presupuesto fue justo, sin sorpresas. Es difícil encontrar gente tan responsable hoy en día".',
         cliente: 'Cliente 3',
     },
     {
@@ -36,7 +36,7 @@ const testimoniosList = [
     },
     {
         id: 5,
-        texto: '"Profesionalismo y seriedad en cada trabajo. Los recomendamos sin dudar."',
+        texto: '"Conozco a la familia desde hace años. Cuando les encargo una estructura, sé que va a durar toda la vida. Son directos y saben lo que hacen."',
         cliente: 'Cliente 5',
     },
 ];
