@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 
 // ── Estructuras images ──────────────────────────────
 import est1 from '../../assets/img/servicios/estructuras/FDS02495.webp';
-import est2 from '../../assets/img/servicios/estructuras/IMG_1022.webp';
 import est3 from '../../assets/img/servicios/estructuras/IMG_9747.webp';
 import est4 from '../../assets/img/servicios/estructuras/IMG_9774.webp';
 import est5 from '../../assets/img/servicios/estructuras/IMG_9862.webp';
@@ -38,7 +37,7 @@ const serviciosList = [
         id: 1,
         titulo: 'Estructuras y transporte',
         descripcion: 'Fabricación de estructuras metálicas robustas, carros y carretones a medida.',
-        images: [est1, est2, est3, est4, est5],
+        images: [est1, est3, est4, est5],
     },
     {
         id: 2,
