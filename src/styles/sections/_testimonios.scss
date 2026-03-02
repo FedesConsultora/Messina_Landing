@@ -46,7 +46,7 @@
 
     &__slider {
         position: relative;
-        height: 500px; // Very generous height to prevent any possible vertical clipping
+        height: 380px;
         max-width: 1200px;
         margin: 0 auto;
         overflow: visible; // Allow the avatar to peek out vertically
@@ -129,22 +129,22 @@
     z-index: 1;
     pointer-events: auto;
 
-    background-color: #1A243D; // Restore background to the card
+    background-color: #1A243D;
     border-radius: 20px;
-    padding: 3rem 1.5rem 2rem 1.5rem; // Increased top padding for the avatar
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 1.2rem;
+    justify-content: center;
+    gap: 1rem;
     text-align: center;
     box-sizing: border-box;
-    overflow: visible; // Allow avatar to peek out
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); // Added some depth
+    overflow: visible;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
     &__avatar {
-        width: 56px;
-        height: 56px;
+        width: 70px;
+        height: 70px;
         border-radius: 50%;
         background-color: #d8d8d8;
         position: absolute;
@@ -158,7 +158,6 @@
         color: rgba(255, 255, 255, 0.72);
         line-height: 1.65;
         margin: 0;
-
     }
 
     &__cliente {
@@ -168,9 +167,9 @@
     }
 
     &.tslide--center {
-        width: 480px;
+        width: 360px;
+        aspect-ratio: 1.4;
         max-width: 85vw;
-        aspect-ratio: 1.33; // 480/360 - squarer shape
         height: auto;
         border-radius: 20px;
         transform: translate(-50%, -50%) scale(1);
@@ -180,31 +179,31 @@
 
     // ── Left ─────────────────────────────────────
     &.tslide--left {
-        width: 390px;
+        width: 320px;
+        aspect-ratio: 1.4;
         max-width: 70vw;
-        aspect-ratio: 1.33;
         height: auto;
-        transform: translate(calc(-50% - 410px), -50%) scale(0.95);
+        transform: translate(calc(-50% - 320px), -50%) scale(0.95);
         opacity: 0.5;
         z-index: 3;
     }
 
     // ── Right ────────────────────────────────────
     &.tslide--right {
-        width: 390px;
+        width: 320px;
+        aspect-ratio: 1.4;
         max-width: 70vw;
-        aspect-ratio: 1.33;
         height: auto;
-        transform: translate(calc(-50% + 410px), -50%) scale(0.95);
+        transform: translate(calc(-50% + 320px), -50%) scale(0.95);
         opacity: 0.5;
         z-index: 3;
     }
 
     // ── Hidden (Emerge Point) ────────────────────
     &.tslide--hidden {
-        width: 390px;
+        width: 320px;
+        aspect-ratio: 1.4;
         max-width: 70vw;
-        aspect-ratio: 1.33;
         height: auto;
         transform: translate(-50%, -50%) scale(0.85);
         opacity: 0;
