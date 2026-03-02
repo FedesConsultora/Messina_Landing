@@ -129,6 +129,33 @@ const Testimonios = () => {
         return () => clearInterval(timer);
     }, [total]);
 
+    // Swipe support
+    const touchStartX = useRef(null);
+    const touchEndX = useRef(null);
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e) => {
+        touchEndX.current = null;
+        touchStartX.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchMove = (e) => {
+        touchEndX.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStartX.current || !touchEndX.current) return;
+        const distance = touchStartX.current - touchEndX.current;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            next();
+        } else if (isRightSwipe) {
+            prev();
+        }
+    };
+
     // Compute visible positions
     const prevIndex = (current - 1 + total) % total;
     const nextIndex = (current + 1) % total;
@@ -148,6 +175,9 @@ const Testimonios = () => {
                 className="testimonios__slider-wrapper"
                 onMouseEnter={() => (isHovered.current = true)}
                 onMouseLeave={() => (isHovered.current = false)}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
             >
                 <div className="testimonios__slider">
                     {testimoniosList.map((t, i) => {
