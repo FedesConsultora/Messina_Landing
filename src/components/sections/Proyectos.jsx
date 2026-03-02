@@ -12,6 +12,34 @@ const WAIcon = () => (
     </svg>
 );
 
+// ── Reveal quote on scroll ───────────────────────────────────────
+const RevealQuote = ({ text }) => {
+    const quoteRef = useRef(null);
+    const [inView, setInView] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setInView(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+        if (quoteRef.current) observer.observe(quoteRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <div className="proyectos__quote" ref={quoteRef}>
+            <blockquote className={`proyectos__quote-text ${inView ? 'in-view' : ''}`}>
+                {text}
+            </blockquote>
+        </div>
+    );
+};
+
 // ── Arrow icons for slider controls ─────────────────────────────
 const ChevronLeft = () => (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +167,7 @@ const Proyectos = () => {
                 <div className="proyectos__cta">
                     <p className="proyectos__cta-text">¿Tenés un proyecto similar en mente?</p>
                     <a
-                        href="https://wa.me/1234567890"
+                        href="https://wa.me/5492345689621"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn--primary proyectos__cta-btn"
@@ -149,13 +177,10 @@ const Proyectos = () => {
                 </div>
             </div>
 
-            {/* ── Quote (below the fold – only visible after scroll) ── */}
-            <div className="proyectos__quote">
-                <blockquote className="proyectos__quote-text">
-                    "Cada proyecto refleja nuestra obsesión por la durabilidad y el detalle.{' '}
-                    No entregamos nada que no cumpla con nuestros estándares de tres generaciones."
-                </blockquote>
-            </div>
+            {/* ── Quote (word-by-word reveal animation) ── */}
+            <RevealQuote
+                text={'"Cada proyecto refleja nuestra obsesión por la durabilidad y el detalle. No entregamos nada que no cumpla con nuestros estándares de tres generaciones."'}
+            />
 
         </section>
     );
