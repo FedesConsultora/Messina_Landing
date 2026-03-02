@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
 import img1 from '../../assets/img/nosotros/IMG_9882.webp';
+import img4 from '../../assets/img/nosotros/111.webp';
 import img2 from '../../assets/img/nosotros/Secuencia 01.00_00_53_06.Imagen fija001.webp';
 import img3 from '../../assets/img/nosotros/Secuencia 01.00_00_53_06.Imagen fija005.webp';
 
-// All nosotros images — add more here and the component adapts automatically
-const ALL_IMAGES = [img1, img2, img3];
+const ALL_IMAGES = [img1, img4, img2, img3];
 
 // First image is always static (slot 1), the rest cycle in slot 2
 const STATIC_IMAGE = ALL_IMAGES[0];
