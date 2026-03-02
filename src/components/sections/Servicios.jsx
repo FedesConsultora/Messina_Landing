@@ -110,6 +110,12 @@ const FadeImage = ({ images, label, delay = 0 }) => {
     );
 };
 
+const NUMERO_WA = '5492345689621';
+const crearWhatsAppLink = (servicio) => {
+    const mensaje = `¿Hola! Estoy interesado en ${servicio}. ¿Podrían enviarme más información?`;
+    return `https://wa.me/${NUMERO_WA}?text=${encodeURIComponent(mensaje)}`;
+};
+
 const Servicios = () => (
     <section id="servicios" className="servicios">
         <div className="servicios__inner">
@@ -129,7 +135,7 @@ const Servicios = () => (
                         <h3 className="servicio-card__titulo">{s.titulo}</h3>
                         <FadeImage images={s.images} label={s.titulo} delay={idx * 1000} />
                         <p className="servicio-card__desc">{s.descripcion}</p>
-                        <a href="https://wa.me/5492345689621" target="_blank" rel="noopener noreferrer" className="btn btn--primary servicio-card__btn">
+                        <a href={crearWhatsAppLink(s.titulo)} target="_blank" rel="noopener noreferrer" className="btn btn--primary servicio-card__btn">
                             Solicitar Presupuesto <CircleArrow />
                         </a>
                     </div>

@@ -13,6 +13,14 @@ const ChevronRight = () => (
     </svg>
 );
 
+// ── Avatar icon (inline SVG, no library needed) ──────────────────
+const AvatarIcon = () => (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="#EB8223" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+    </svg>
+);
+
 const testimoniosList = [
     {
         id: 1,
@@ -32,13 +40,33 @@ const testimoniosList = [
     {
         id: 4,
         texto: '"Contratamos a Messina para una estructura compleja. Cuando la vimos terminada, superó nuestras expectativas en durabilidad y acabado."',
-        cliente: 'Cliente 4',
+        cliente: 'Cliente 4'
     },
+
     {
         id: 5,
         texto: '"Conozco a la familia desde hace años. Cuando les encargo una estructura, sé que va a durar toda la vida. Son directos y saben lo que hacen."',
-        cliente: 'Cliente 5',
+        cliente: 'Cliente 5'
     },
+
+    {
+        id: 6,
+        texto: '"El servicio es que ofrecen es muy bueno: desde el diseño de la estructura hasta el último bulón. Destaco tambien la transparencia en el presupuesto y la calidad de los materiales utilizados. Sin dudas, nuestro referente para cualquier obra metálica."',
+        cliente: 'Cliente 6'
+    },
+
+    {
+        id: 7,
+        texto: '"Adquirimos una tejedora de alambrado y la atención post-venta fue clave. La durabilidad de los componentes es notable; se nota que está hecha con personas de oficio metalúrgico."',
+        cliente: 'Cliente 7'
+    },
+
+    {
+        id: 8,
+        texto: '"Los contratamos para la construcción de un galpón de 20x40.. Lo que más destaco es la solidez de la estructura y el asesoramiento previo; no solo cumplen con los plazos de montaje, sino que los detalles de terminación en la zinguería son impecables.”',
+        cliente: 'Cliente 8',
+    },
+
 ];
 
 const AUTOPLAY_MS = 5000;
@@ -102,7 +130,9 @@ const Testimonios = () => {
                                 onClick={() => i !== current && goTo(i)}
                                 style={{ cursor: i !== current ? 'pointer' : 'default' }}
                             >
-                                <div className="testimonio-card__avatar" aria-label={`Avatar ${t.cliente}`} />
+                                <div className="testimonio-card__avatar">
+                                    <AvatarIcon />
+                                </div>
                                 <p className="testimonio-card__texto">{t.texto}</p>
                                 <span className="testimonio-card__cliente">{t.cliente}</span>
                             </div>
