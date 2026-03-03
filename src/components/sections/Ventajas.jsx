@@ -54,7 +54,7 @@ const Ventajas = () => {
                 </div>
 
                 {/* ── Right (desktop) / Bottom (mobile): title + list ── */}
-                <div className="ventajas__content">
+                <div id="ventajas-content" className="ventajas__content">
                     <h2 className="ventajas__title">¿Por qué<br />elegirnos?</h2>
 
                     <ul className="ventajas__list">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import logo from '../assets/logos/messina.svg'
 
 
@@ -10,52 +10,67 @@ const ArrowIcon = () => (
 
 const SECTIONS = ['inicio', 'nosotros', 'servicios', 'ventajas', 'proyectos', 'testimonios'];
 
+// Where each nav link actually scrolls to (override target for specific sections)
+const SCROLL_TARGETS = {
+    ventajas: 'ventajas-content', // skip the image, land on the text
+};
+
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
     const [activeSection, setActiveSection] = useState('inicio');
     const lastScrollY = useRef(0);
+    const navLinksRef = useRef(null);
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-    const closeMenu = () => setIsMenuOpen(false);
+    const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+    const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
-    // Lock body scroll when menu is open (works on iOS too)
+    // Lock body scroll when menu is open — using touchmove prevention (iOS-safe)
+    // This avoids position:fixed on body which causes scroll jumps
     useEffect(() => {
-        if (isMenuOpen) {
-            const scrollY = window.scrollY;
-            document.documentElement.style.overflow = 'hidden';
-            document.documentElement.style.overflowX = 'hidden';
-            document.body.style.overflow = 'hidden';
-            document.body.style.overflowX = 'hidden';
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-            document.body.style.width = '100%';
-            document.body.style.maxWidth = '100vw';
-        } else {
-            const scrollY = document.body.style.top;
-            document.documentElement.style.overflow = '';
-            document.documentElement.style.overflowX = '';
-            document.body.style.overflow = '';
-            document.body.style.overflowX = '';
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            document.body.style.maxWidth = '';
-            if (scrollY) {
-                window.scrollTo(0, parseInt(scrollY || '0') * -1);
-            }
-        }
+        if (!isMenuOpen) return;
+
+        const preventScroll = (e) => {
+            // Allow scrolling inside the nav-links panel itself
+            if (navLinksRef.current && navLinksRef.current.contains(e.target)) return;
+            e.preventDefault();
+        };
+
+        document.addEventListener('touchmove', preventScroll, { passive: false });
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+
         return () => {
+            document.removeEventListener('touchmove', preventScroll);
             document.documentElement.style.overflow = '';
-            document.documentElement.style.overflowX = '';
             document.body.style.overflow = '';
-            document.body.style.overflowX = '';
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            document.body.style.maxWidth = '';
         };
     }, [isMenuOpen]);
+
+    // Close menu when tapping outside the nav-links panel (mobile)
+    useEffect(() => {
+        if (!isMenuOpen) return;
+
+        const handleTapOutside = (e) => {
+            // If tap is inside the nav-links panel, ignore
+            if (navLinksRef.current && navLinksRef.current.contains(e.target)) return;
+            // If tap is on the menu toggle button, let toggleMenu handle it
+            if (e.target.closest('.menu-toggle')) return;
+            closeMenu();
+        };
+
+        // Use a small delay so the opening tap doesn't immediately close it
+        const timer = setTimeout(() => {
+            document.addEventListener('touchstart', handleTapOutside, { passive: true });
+            document.addEventListener('mousedown', handleTapOutside);
+        }, 10);
+
+        return () => {
+            clearTimeout(timer);
+            document.removeEventListener('touchstart', handleTapOutside);
+            document.removeEventListener('mousedown', handleTapOutside);
+        };
+    }, [isMenuOpen, closeMenu]);
 
     // Detect active section via scroll position
     useEffect(() => {
@@ -67,7 +82,6 @@ const Navbar = () => {
                 const el = document.getElementById(id);
                 if (!el) continue;
                 const rect = el.getBoundingClientRect();
-                // Section top is at or above the bottom of the navbar
                 if (rect.top <= navHeight + 2) {
                     current = id;
                 }
@@ -80,20 +94,31 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', getActiveSection);
     }, []);
 
-    const scrollTo = (id) => {
-        closeMenu();
-        const el = document.getElementById(id);
+    const scrollTo = (e, id) => {
+        e.preventDefault();
+        setIsMenuOpen(false);
+
+        // Determine the actual target element
+        const targetId = SCROLL_TARGETS[id] || id;
+        const el = document.getElementById(targetId);
         if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
+            requestAnimationFrame(() => {
+                const headerHeight = document.querySelector('.header')?.offsetHeight ?? 60;
+                const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: elementPosition - headerHeight,
+                    behavior: 'smooth',
+                });
+            });
         }
     };
 
+    // Hide/show navbar on scroll direction
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
             const delta = currentScrollY - lastScrollY.current;
 
-            // Only toggle after a meaningful scroll (5px threshold)
             if (Math.abs(delta) < 5) return;
 
             if (delta > 0 && currentScrollY > 80) {
@@ -108,10 +133,25 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // On mobile, tapping anywhere outside the header hides the navbar bar
+    useEffect(() => {
+        const handleTapOutside = (e) => {
+            if (window.innerWidth > 900) return;
+            if (isMenuOpen) return;
+            const header = document.querySelector('.header');
+            if (header && !header.contains(e.target)) {
+                setIsHidden(true);
+            }
+        };
+
+        document.addEventListener('touchstart', handleTapOutside, { passive: true });
+        return () => document.removeEventListener('touchstart', handleTapOutside);
+    }, [isMenuOpen]);
+
     return (
         <header className={`header ${isHidden ? 'header--hidden' : ''}`}>
             <nav className="nav">
-                <a href="#inicio" className="logo-link" onClick={() => scrollTo('inicio')}>
+                <a href="#inicio" className="logo-link" onClick={(e) => scrollTo(e, 'inicio')}>
                     <img src={logo} alt="Messina Logo" />
                 </a>
 
@@ -127,19 +167,16 @@ const Navbar = () => {
                     )}
                 </button>
 
-                {/* ── Backdrop overlay (mobile) ── */}
-                <div
-                    className={`nav-overlay ${isMenuOpen ? 'open' : ''}`}
-                    onClick={closeMenu}
-                />
+                {/* ── Backdrop overlay (mobile) — visual only, close handled by document listener ── */}
+                <div className={`nav-overlay ${isMenuOpen ? 'open' : ''}`} />
 
-                <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+                <ul ref={navLinksRef} className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
                     {SECTIONS.map((id) => (
                         <li key={id}>
                             <a
                                 href={`#${id}`}
                                 className={activeSection === id ? 'nav-active' : ''}
-                                onClick={() => scrollTo(id)}
+                                onClick={(e) => scrollTo(e, id)}
                             >
                                 {id.charAt(0).toUpperCase() + id.slice(1)}
                             </a>
