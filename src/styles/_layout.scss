@@ -309,12 +309,23 @@
         justify-content: center;
     }
 
+    /* ── Fixed navbar on mobile to prevent layout jumps ── */
     .header {
+        position: fixed;
+        left: 0;
+        right: 0;
+        will-change: transform;
+
         .nav {
             padding: 0.7rem 1.2rem;
             gap: 0;
             position: relative;
         }
+    }
+
+    /* Compensate for fixed header height */
+    .main-content {
+        padding-top: 60px;
     }
 
     .menu-toggle {

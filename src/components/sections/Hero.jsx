@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import heroBg from "../../assets/img/background-1.png";
 import heroVideo from "../../assets/img/messina.mp4";
 
@@ -10,6 +10,16 @@ const ArrowIcon = () => (
 
 const Hero = () => {
     const [videoReady, setVideoReady] = useState(false);
+    const videoRef = useRef(null);
+
+    // Seamless loop: restart video slightly before it ends to avoid the stutter
+    const handleTimeUpdate = useCallback(() => {
+        const video = videoRef.current;
+        if (video && video.duration && video.currentTime > video.duration - 0.3) {
+            video.currentTime = 0;
+            video.play();
+        }
+    }, []);
 
     return (
         <section id="inicio" className="hero">
@@ -17,12 +27,13 @@ const Hero = () => {
                 {/* Fallback image — same positioning as video, hidden once video plays */}
                 {!videoReady && <img src={heroBg} alt="" />}
                 <video
+                    ref={videoRef}
                     autoPlay
-                    loop
                     muted
                     playsInline
                     src={heroVideo}
                     onPlaying={() => setVideoReady(true)}
+                    onTimeUpdate={handleTimeUpdate}
                 />
             </div>
 
