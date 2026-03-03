@@ -51,8 +51,8 @@ const Hero = () => {
                 </p>
 
                 <div className="hero__actions">
-                    <a href="https://wa.me/5492345689621" target="_blank" rel="noopener noreferrer" className="btn btn--primary">
-                        Solicitar Presupuesto <ArrowIcon />
+                    <a style={{ textTransform: "none" }} href="https://wa.me/5492345689621" target="_blank" rel="noopener noreferrer" className="btn btn--primary">
+                        Solicitar presupuesto <ArrowIcon />
                     </a>
                     <a href="#servicios" className="btn btn--outline">
                         Ver todos nuestros servicios
