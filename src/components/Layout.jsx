@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
             {/* ── Top Info Bar ─────────────────────────────── */}
             <div className="topbar">
                 <div className="topbar__inner">
-                    <span className="topbar__item"><CircleCheck /> 8:00 a 15:00 hrs</span>
+                    <span className="topbar__item"><CircleCheck /> 8:00 a 15:00 h</span>
                     <a href="https://wa.me/5492345689621?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" className="topbar__item topbar__item--link">
                         <WhatsAppIcon />+54 9 2345 68‑9621
                     </a>
