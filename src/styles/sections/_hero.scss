@@ -80,7 +80,7 @@
         color: rgba(255, 255, 255, 0.75);
         line-height: 1.65;
         margin-bottom: 2.5rem;
-        max-width: 480px;
+        max-width: 400px;
     }
 
     &__actions {
@@ -124,8 +124,11 @@
         }
 
         &__subtitle {
-            font-size: 0.95rem;
-            max-width: 100%;
+            font-size: 1rem;
+            margin-top: 0;
+            max-width: 180px;
+            font-weight: 800;
+
         }
 
         &__actions {
@@ -145,6 +148,8 @@
     .hero__title {
         font-size: 1.8rem;
     }
+
+
 
     .hero__content {
         padding: 0rem 1.2rem 3rem;
