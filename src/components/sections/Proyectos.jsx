@@ -81,12 +81,19 @@ const Proyectos = () => {
         goTo((current - 1 + total) % total, 'prev');
     }, [current, total, goTo]);
 
-    // Autoplay (pauses on hover or drag)
+    // Autoplay (pauses on hover, drag, or recent interaction)
     const isHovered = useRef(false);
     const isDragging = useRef(false);
+    const lastInteraction = useRef(0);
+
+    const markInteraction = useCallback(() => {
+        lastInteraction.current = Date.now();
+    }, []);
+
     useEffect(() => {
         const timer = setInterval(() => {
-            if (!isHovered.current && !isDragging.current) next();
+            const cooledDown = Date.now() - lastInteraction.current > AUTOPLAY_MS;
+            if (!isHovered.current && !isDragging.current && cooledDown) next();
         }, AUTOPLAY_MS);
         return () => clearInterval(timer);
     }, [next]);
@@ -100,11 +107,12 @@ const Proyectos = () => {
         isDragging.current = true;
         dragStartX.current = e.clientX;
         dragged.current = false;
+        markInteraction();
         if (sliderRef.current) {
             sliderRef.current.setPointerCapture(e.pointerId);
             sliderRef.current.style.cursor = 'grabbing';
         }
-    }, []);
+    }, [markInteraction]);
 
     const handlePointerMove = useCallback((e) => {
         if (!isDragging.current) return;
@@ -115,19 +123,21 @@ const Proyectos = () => {
     const handlePointerUp = useCallback((e) => {
         if (!isDragging.current) return;
         isDragging.current = false;
+        markInteraction();
         if (sliderRef.current) sliderRef.current.style.cursor = 'grab';
 
         const diff = e.clientX - dragStartX.current;
         const threshold = 50; // min px to trigger a slide change
         if (diff < -threshold) next();
         else if (diff > threshold) prev();
-    }, [next, prev]);
+    }, [next, prev, markInteraction]);
 
     const handleSlideClick = useCallback((i) => {
         // Ignore click if it came from a drag gesture
         if (dragged.current) return;
+        markInteraction();
         if (i !== current) goTo(i, i > current ? 'next' : 'prev');
-    }, [current, goTo]);
+    }, [current, goTo, markInteraction]);
 
     // Compute visible indices: [prev, current, next]
     // All other indices will get slide--hidden and be parked under the center
