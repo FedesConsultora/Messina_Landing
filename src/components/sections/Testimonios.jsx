@@ -24,47 +24,47 @@ const AvatarIcon = () => (
 const testimoniosList = [
     {
         id: 1,
-        texto: '"Conozco a la familia desde hace años. Cuando les encargo una estructura, sé que va a durar toda la vida. Son directos y saben lo que hacen."',
-        cliente: 'Cliente 1',
+        texto: '"Conozco a la familia desde hace años. Cuando les encargo una estructura, sé que va a durar toda la vida. Son directos y saben lo que hacen".',
+        cliente: 'Rubén Darío Vissani',
     },
     {
         id: 2,
         texto: '"Necesitábamos una pieza específica de tornería que ya no se conseguía. En Messina no solo la fabricaron, sino que mejoraron el diseño original. Se nota el oficio".',
-        cliente: 'Cliente 2',
+        cliente: 'Leandro Ezequiel Barragán',
     },
     {
         id: 3,
         texto: '"Excelente relación calidad-precio. Cumplieron con los plazos pactados y el presupuesto fue justo, sin sorpresas. Es difícil encontrar gente tan responsable hoy en día".',
-        cliente: 'Cliente 3',
+        cliente: 'Valeria Micaela Páez',
     },
     {
         id: 4,
-        texto: '"Contratamos a Messina para una estructura compleja. Cuando la vimos terminada, superó nuestras expectativas en durabilidad y acabado."',
-        cliente: 'Cliente 4'
+        texto: '"Contratamos a Messina para una estructura compleja. Cuando la vimos terminada, superó nuestras expectativas en durabilidad y acabado".',
+        cliente: 'Esteban Molfese'
     },
 
     {
         id: 5,
-        texto: '"Les encargamos bebederos rurales para el campo y el resultado fue excelente. Vinieron a medir, nos asesoraron con el diseño y la terminación de las soldaduras es impecable. Gente seria y cumplidora."',
-        cliente: 'Cliente 5'
+        texto: '"Les encargamos bebederos rurales para el campo y el resultado fue excelente. Vinieron a medir, nos asesoraron con el diseño y la terminación de las soldaduras es impecable. Gente seria y cumplidora".',
+        cliente: 'Matías Rodrigo Soria'
     },
 
     {
         id: 6,
-        texto: '"El servicio es que ofrecen es muy bueno: desde el diseño de la estructura hasta el último bulón. Destaco tambien la transparencia en el presupuesto y la calidad de los materiales utilizados. Sin dudas, nuestro referente para cualquier obra metálica."',
-        cliente: 'Cliente 6'
+        texto: '"El servicio es que ofrecen es muy bueno: desde el diseño de la estructura hasta el último bulón. Destaco tambien la transparencia en el presupuesto y la calidad de los materiales utilizados. Sin dudas, nuestro referente para cualquier obra metálica".',
+        cliente: 'Pablo Andrés Boccuzzi'
     },
 
     {
         id: 7,
-        texto: '"Adquirimos una tejedora de alambrado y la atención post-venta fue clave. La durabilidad de los componentes es notable; se nota que está hecha con personas de oficio metalúrgico."',
-        cliente: 'Cliente 7'
+        texto: '"Adquirimos una tejedora de alambrado y la atención post-venta fue clave. La durabilidad de los componentes es notable; se nota que está hecha con personas de oficio metalúrgico".',
+        cliente: 'Gustavo Zanetti'
     },
 
     {
         id: 8,
-        texto: '"Los contratamos para la construcción de un galpón de 20x40.. Lo que más destaco es la solidez de la estructura y el asesoramiento previo; no solo cumplen con los plazos de montaje, sino que los detalles de terminación en la zinguería son impecables.”',
-        cliente: 'Cliente 8',
+        texto: '"Los contratamos para la construcción de un galpón de 20x40.. Lo que más destaco es la solidez de la estructura y el asesoramiento previo; no solo cumplen con los plazos de montaje, sino que los detalles de terminación en la zinguería son impecables".',
+        cliente: 'Roberto Carbone',
     },
 
 ];

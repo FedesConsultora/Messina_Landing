@@ -136,7 +136,7 @@ const Servicios = () => (
                         <FadeImage images={s.images} label={s.titulo} delay={idx * 1000} />
                         <p className="servicio-card__desc">{s.descripcion}</p>
                         <a href={crearWhatsAppLink(s.titulo)} target="_blank" rel="noopener noreferrer" className="btn btn--primary servicio-card__btn">
-                            Solicitar Presupuesto <CircleArrow />
+                            Solicitar presupuesto <CircleArrow />
                         </a>
                     </div>
                 ))}

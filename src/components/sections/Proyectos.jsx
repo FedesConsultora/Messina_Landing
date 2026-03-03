@@ -81,14 +81,53 @@ const Proyectos = () => {
         goTo((current - 1 + total) % total, 'prev');
     }, [current, total, goTo]);
 
-    // Autoplay (pauses on hover)
+    // Autoplay (pauses on hover or drag)
     const isHovered = useRef(false);
+    const isDragging = useRef(false);
     useEffect(() => {
         const timer = setInterval(() => {
-            if (!isHovered.current) next();
+            if (!isHovered.current && !isDragging.current) next();
         }, AUTOPLAY_MS);
         return () => clearInterval(timer);
     }, [next]);
+
+    // ── Drag / swipe support ────────────────────────────────────
+    const sliderRef = useRef(null);
+    const dragStartX = useRef(0);
+    const dragged = useRef(false);
+
+    const handlePointerDown = useCallback((e) => {
+        isDragging.current = true;
+        dragStartX.current = e.clientX;
+        dragged.current = false;
+        if (sliderRef.current) {
+            sliderRef.current.setPointerCapture(e.pointerId);
+            sliderRef.current.style.cursor = 'grabbing';
+        }
+    }, []);
+
+    const handlePointerMove = useCallback((e) => {
+        if (!isDragging.current) return;
+        const diff = e.clientX - dragStartX.current;
+        if (Math.abs(diff) > 10) dragged.current = true;
+    }, []);
+
+    const handlePointerUp = useCallback((e) => {
+        if (!isDragging.current) return;
+        isDragging.current = false;
+        if (sliderRef.current) sliderRef.current.style.cursor = 'grab';
+
+        const diff = e.clientX - dragStartX.current;
+        const threshold = 50; // min px to trigger a slide change
+        if (diff < -threshold) next();
+        else if (diff > threshold) prev();
+    }, [next, prev]);
+
+    const handleSlideClick = useCallback((i) => {
+        // Ignore click if it came from a drag gesture
+        if (dragged.current) return;
+        if (i !== current) goTo(i, i > current ? 'next' : 'prev');
+    }, [current, goTo]);
 
     // Compute visible indices: [prev, current, next]
     // All other indices will get slide--hidden and be parked under the center
@@ -118,7 +157,15 @@ const Proyectos = () => {
                     onMouseEnter={() => (isHovered.current = true)}
                     onMouseLeave={() => (isHovered.current = false)}
                 >
-                    <div className="proyectos__slider">
+                    <div
+                        ref={sliderRef}
+                        className="proyectos__slider"
+                        style={{ cursor: 'grab', touchAction: 'pan-y' }}
+                        onPointerDown={handlePointerDown}
+                        onPointerMove={handlePointerMove}
+                        onPointerUp={handlePointerUp}
+                        onPointerCancel={handlePointerUp}
+                    >
                         {proyectos.map((p, i) => {
                             let posClass = 'slide--hidden';
                             if (i === current) posClass = 'slide--center';
@@ -129,13 +176,14 @@ const Proyectos = () => {
                                 <div
                                     key={p.id}
                                     className={`proyecto-slide ${posClass}`}
-                                    onClick={() => i !== current && goTo(i, i > current ? 'next' : 'prev')}
-                                    style={{ cursor: i !== current ? 'pointer' : 'default' }}
+                                    onClick={() => handleSlideClick(i)}
+                                    style={{ cursor: i !== current ? 'pointer' : undefined }}
                                 >
                                     <img
                                         className="proyecto-slide__img"
                                         src={p.image}
                                         alt={p.title}
+                                        draggable={false}
                                     />
                                 </div>
                             );
@@ -179,7 +227,7 @@ const Proyectos = () => {
 
             {/* ── Quote (word-by-word reveal animation) ── */}
             <RevealQuote
-                text={'"Cada proyecto refleja nuestra obsesión por la durabilidad y el detalle. No entregamos nada que no cumpla con nuestros estándares de tres generaciones."'}
+                text={'"Cada proyecto refleja nuestra obsesión por la durabilidad y el detalle. No entregamos nada que no cumpla con nuestros estándares de tres generaciones".'}
             />
 
         </section>
