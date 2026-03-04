@@ -8,7 +8,7 @@ const ArrowIcon = () => (
     </svg>
 );
 
-const SECTIONS = ['inicio', 'nosotros', 'servicios', 'ventajas', 'proyectos', 'testimonios'];
+const SECTIONS = ['inicio', 'nosotros', 'servicios', 'ventajas', 'proyectos'/*, 'testimonios'*/];
 
 // Where each nav link actually scrolls to (override target for specific sections)
 const SCROLL_TARGETS = {

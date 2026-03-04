@@ -8,7 +8,7 @@ const Nosotros = lazy(() => import('./components/sections/Nosotros'))
 const Servicios = lazy(() => import('./components/sections/Servicios'))
 const Ventajas = lazy(() => import('./components/sections/Ventajas'))
 const Proyectos = lazy(() => import('./components/sections/Proyectos'))
-const Testimonios = lazy(() => import('./components/sections/Testimonios'))
+// const Testimonios = lazy(() => import('./components/sections/Testimonios'))
 const Contacto = lazy(() => import('./components/sections/Contacto'))
 
 // ── Loading fallback ───────────────────────────────────────────
@@ -29,7 +29,7 @@ function App() {
           <Servicios />
           <Ventajas />
           <Proyectos />
-          <Testimonios />
+          {/* <Testimonios /> */}
           <Contacto />
         </Suspense>
       </Layout>
