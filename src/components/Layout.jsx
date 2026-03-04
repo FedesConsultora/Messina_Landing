@@ -26,13 +26,13 @@ const Layout = ({ children }) => {
                     <a href="https://wa.me/5492345689621?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" className="topbar__item topbar__item--link">
                         <WhatsAppIcon />+54 9 2345 68‑9621
                     </a>
-                    <span className="topbar__item">
+                    <a href="https://www.google.com/maps/place/Metalurgica+MH/@-35.2610088,-59.630922,17z/data=!3m1!4b1!4m6!3m5!1s0x95bdcd16ed74d163:0xad92ea9682e4cb34!8m2!3d-35.2610088!4d-59.630922!16s%2Fg%2F11h_674dlh!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDMwMS4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="topbar__item topbar__item--link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                             <circle cx="12" cy="10" r="3" />
                         </svg>
-                        Dirección
-                    </span>
+                        Blvd. Alejandro Keen 990, Pedernales.
+                    </a>
                 </div>
             </div>
 
