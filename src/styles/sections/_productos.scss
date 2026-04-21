@@ -86,6 +86,7 @@
             opacity: 0.4;
             transform: scale(1.01);
         }
+
         to {
             opacity: 1;
             transform: scale(1);
@@ -98,7 +99,10 @@
         overflow-x: auto;
         padding: 5px 0 15px;
         scrollbar-width: none;
-        &::-webkit-scrollbar { display: none; }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     &__thumb {
@@ -120,7 +124,10 @@
             object-fit: cover;
         }
 
-        &:hover { opacity: 1; }
+        &:hover {
+            opacity: 1;
+        }
+
         &.active {
             border-color: $orange;
             opacity: 1;
@@ -143,34 +150,35 @@
     }
 
     &__info-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         margin-bottom: 15px;
+        margin-top: 0;
         color: $white;
         font-weight: 700;
     }
 
     &__info-description {
         color: rgba($white, 0.6);
-        line-height: 1.5;
-        margin-bottom: 25px;
-        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 16px;
+        font-size: 0.8rem;
     }
 
     &__features-list {
         list-style: none;
         padding: 0;
-        margin: 0 0 30px 0;
+        margin: 0 0 20px 0;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 4px;
     }
 
     &__feature-item {
         display: flex;
         align-items: flex-start;
-        gap: 10px;
+        gap: 8px;
         color: rgba($white, 0.9);
-        font-size: 0.95rem;
+        font-size: 0.8rem;
     }
 
     &__feature-icon {
@@ -182,22 +190,24 @@
     &__actions {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        align-items: flex-start; // Stay left on desktop
+        gap: 8px;
+        align-items: center; // Stay left on desktop
 
         .btn--primary {
             width: auto;
-            min-width: 240px;
+            min-width: 220px;
             justify-content: center;
-            font-size: 1rem;
-            padding: 15px 30px;
+            font-size: .9rem;
+            padding: 12px 22px;
+            font-weight: 500;
+            ;
         }
     }
 
     &__actions-hint {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         color: rgba($white, 0.4);
-        text-align: left;
+        text-align: center;
     }
 }
 
@@ -212,7 +222,8 @@
             gap: 40px;
         }
 
-        &__gallery, &__info {
+        &__gallery,
+        &__info {
             flex: 0 1 100%;
             width: 100%;
         }
@@ -223,6 +234,7 @@
 
         &__actions {
             align-items: center; // Center on tablet/mobile instead of stretch
+
             .btn--primary {
                 width: auto;
                 min-width: 260px;
@@ -361,9 +373,14 @@
         }
     }
 
-    .btn--primary {
-        margin-top: 10px;
-        width: 100%;
-        justify-content: center;
+    &__actions {
+
+
+        .btn--primary {
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
     }
 }
