@@ -23,7 +23,7 @@ const Productos = () => {
         const interval = setInterval(() => {
             const now = Date.now();
             const timeSinceInteraction = now - lastInteraction.current;
-            
+
             // Resume auto-rotation if no interaction in the last 60 seconds
             if (timeSinceInteraction >= 60000) {
                 setActiveImg((prev) => (prev + 1) % machineImages.length);
@@ -108,11 +108,9 @@ const Productos = () => {
                                     className="btn btn--primary"
                                     onClick={() => setIsModalOpen(true)}
                                 >
-                                    Descargar catálogo completo
+                                    Descargar brochure
                                 </button>
-                                <p className="productos__actions-hint">
-                                    ¿Buscás otras soluciones? Descargá nuestro catálogo con todos nuestros prodcutos.
-                                </p>
+
                             </div>
                         </div>
                     </div>

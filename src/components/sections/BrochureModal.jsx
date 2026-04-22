@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import brochurePDF from '../../assets/Brochure tejedora - digital.pdf';
 
 const BrochureModal = ({ isOpen, onClose }) => {
     const [formData, setFormData] = useState({
@@ -44,11 +45,11 @@ const BrochureModal = ({ isOpen, onClose }) => {
             setIsSubmitting(false);
             setIsSuccess(true);
 
-            // Trigger download after success (using a dummy PDF link)
+            // Trigger download after success
             const link = document.createElement('a');
-            link.href = '#'; // In a real app, this would be the actual PDF path
-            link.download = 'Messina_Brochure.pdf';
-            // link.click(); // Commented out to avoid actually downloading in this environment
+            link.href = brochurePDF;
+            link.download = 'Brochure_Messina.pdf';
+            link.click();
 
             console.log('Lead saved:', newLead);
         }, 1500);
@@ -68,7 +69,7 @@ const BrochureModal = ({ isOpen, onClose }) => {
                         <div style={{ fontSize: '4rem', marginBottom: '20px' }}>✅</div>
                         <h2 className="contact-form__title">¡Gracias por tu interés!</h2>
                         <p className="contact-form__subtitle">
-                            La descarga de nuestro catálogo debería comenzar automáticamente.
+                            La descarga de nuestro brochure debería comenzar automáticamente.
                         </p>
                         <button
                             className="btn btn--primary"
@@ -83,8 +84,8 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 ) : (
                     <form className="contact-form" onSubmit={handleSubmit}>
                         <div className="contact-form__header">
-                            <h2 className="contact-form__title">Descargar catálogo</h2>
-                            <p className="contact-form__subtitle">Completá tus datos y accedé a nuestro catálogo completo.</p>
+                            <h2 className="contact-form__title">Descargar brochure</h2>
+                            <p className="contact-form__subtitle">Completá tus datos y accedé a nuestro brochure completo.</p>
                         </div>
 
                         <div className="contact-form__group">
@@ -128,13 +129,15 @@ const BrochureModal = ({ isOpen, onClose }) => {
 
 
 
-                        <button
-                            type="submit"
-                            className="btn btn--primary"
-                            disabled={isSubmitting}
-                        >
-                            {isSubmitting ? 'Procesando...' : 'Obtener catálogo'}
-                        </button>
+                        <div className="contact-form__actions">
+                            <button
+                                type="submit"
+                                className="btn btn--primary"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? 'Procesando...' : 'Obtener brochure'}
+                            </button>
+                        </div>
                     </form>
                 )}
             </div>
